@@ -1,0 +1,39 @@
+{
+    "typescript.check.workspaceVersion": false,
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "node_modules": true,
+        "bin": true,
+        "obj": true,
+        "dist": true,
+        "Properties": true,
+        ".vs": true,
+        "*.csproj": true,
+        "*.sln": true,
+        "*.csproj.user": true,
+        "*.suo": true
+    },
+    "workbench.colorCustomizations": {
+        "activityBar.activeBackground": "#bff8fa",
+        "activityBar.background": "#bff8fa",
+        "activityBar.foreground": "#15202b",
+        "activityBar.inactiveForeground": "#15202b99",
+        "activityBarBadge.background": "#f36bef",
+        "activityBarBadge.foreground": "#15202b",
+        "commandCenter.border": "#15202b99",
+        "sash.hoverBorder": "#bff8fa",
+        "statusBar.background": "#8ff2f7",
+        "statusBar.foreground": "#15202b",
+        "statusBarItem.hoverBackground": "#5fecf4",
+        "statusBarItem.remoteBackground": "#8ff2f7",
+        "statusBarItem.remoteForeground": "#15202b",
+        "titleBar.activeBackground": "#8ff2f7",
+        "titleBar.activeForeground": "#15202b",
+        "titleBar.inactiveBackground": "#8ff2f799",
+        "titleBar.inactiveForeground": "#15202b99"
+    },
+    "peacock.color": "#8ff2f7"
+}

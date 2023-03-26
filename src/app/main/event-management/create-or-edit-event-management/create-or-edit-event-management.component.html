@@ -1,0 +1,101 @@
+<div appBsModal #createOrEditEventManagement="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditEventManagement" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #eventManagementForm="ngForm" novalidate (ngSubmit)="save(eventManagement?.id)" autocomplete="new-password">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="eventManagement.id">{{"Edit Event Management Request" | localize}}</span>
+                        <span *ngIf="!eventManagement.id">{{"Create Event Management Request" | localize}}</span>
+                    </h4>
+                    <button type="button" class="close" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="form-group mb-5">
+                      <multi-lingual-editor [translations]="eventManagement.translations">
+                        <ng-container *multiLingualEditorTranslation="let i = index; let default = first">
+                          <div class="form-group mb-5" >
+                            <label class="form-label" for="[{{ i }}].name">
+                              {{ "Name" | localize }}
+                            </label>
+                              <input type="text" class="form-control form-info" id="[{{ i }}].name" name="[{{ i }}].name" [(ngModel)]="(eventManagement?.translations)[i].name" 
+                              [required]="default" maxlength="64" #nameModel="ngModel" #nameEl/>
+                          </div>
+                        </ng-container>
+                      </multi-lingual-editor>
+                    </div>
+<!-- 
+                    <div class="form-group col-md-6 mt-5 mb-5">
+                        <label class="form-label" for="abbreviation">{{"Abbreviation" | localize}} </label>
+                        <input id="abbreviation" #nameInput="ngModel" class="form-control" type="text" name="abbreviation" [(ngModel)]="eventManagement.abbreviation"  maxlength="64">
+                        
+                    </div>   -->
+              
+                    <div class="form-group col-md-6 mt-5 mb-5">
+                        <label class="form-label" for="displayOrder">{{"Display Order" | localize}} </label>
+                        <input id="displayOrder" #nameInput="ngModel" class="form-control" type="text" name="displayOrder" [(ngModel)]="eventManagement.displayOrder"  maxlength="64">
+                        
+                    </div>  
+                  </div>
+                         
+                  <div class="mt-9">
+                    <label for="published" class="form-check form-check-custom form-check-solid py-1">
+                        <input id="published" class="form-check-input" type="checkbox" name="published" [(ngModel)]="eventManagement.isPublished">
+                        <span class="form-check-label">
+                          {{ 'published' | localize }}
+                      </span> 
+                    </label>
+                  </div> 
+                  <div class="mt-9">
+                    <label for="detail" class="form-check form-check-custom form-check-solid py-1">
+                        <input id="detail" class="form-check-input" type="checkbox" name="detail" [(ngModel)]="eventManagement.detail">
+                        <span class="form-check-label">
+                          {{ 'detail' | localize }}
+                      </span> 
+                    </label>
+                  </div>       
+                  <div class="mt-9">
+                    <label for="banner" class="form-check form-check-custom form-check-solid py-1">
+                        <input id="banner" class="form-check-input" type="checkbox" name="banner" [(ngModel)]="eventManagement.banner">
+                        <span class="form-check-label">
+                          {{ 'banner' | localize }}
+                      </span> 
+                    </label>
+                  </div> 
+                  <div class="mt-9">
+                    <label for="minimumSeats" class="form-check form-check-custom form-check-solid py-1">
+                        <input id="minimumSeats" class="form-check-input" type="checkbox" name="minimumSeats" [(ngModel)]="eventManagement.minimumSeats">
+                        <span class="form-check-label">
+                          {{ 'minimumSeats' | localize }}
+                      </span> 
+                    </label>
+                  </div>       <div class="mt-9">
+                    <label for="maximumSeats" class="form-check form-check-custom form-check-solid py-1">
+                        <input id="maximumSeats" class="form-check-input" type="checkbox" name="maximumSeats" [(ngModel)]="eventManagement.maximumSeats">
+                        <span class="form-check-label">
+                          {{ 'maximumSeats' | localize }}
+                      </span> 
+                    </label>
+                  </div> 
+                  <div class="mt-9">
+                    <label for="refundAllowed" class="form-check form-check-custom form-check-solid py-1">
+                        <input id="refundAllowed" class="form-check-input" type="checkbox" name="refundAllowed" [(ngModel)]="eventManagement.refundAllowed">
+                        <span class="form-check-label">
+                          {{ 'refundAllowed' | localize }}
+                      </span> 
+                    </label>
+                  </div> 
+                </div>
+                            
+            <div class="modal-footer">     
+              <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!eventManagementForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')">
+                <i class="fa fa-save"></i> <span>{{"Save" | localize}}</span>
+              </button>
+            </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
