@@ -1,8 +1,11 @@
+import { WeekDayTimingsDto } from "./week-day-timings-dto.model";
+
 export interface IEventManagementWeekDaysDto {
     id: number;
     eventWeekDayId: number;
     eventId: number;
     tenantId: number;
+    weekDayTimings: WeekDayTimingsDto[];
     }
 
 export class EventManagementWeekDaysDto implements IEventManagementWeekDaysDto {
@@ -17,6 +20,7 @@ static fromJS(data: any): EventManagementWeekDaysDto {
     eventWeekDayId: number;
     eventId: number;
     tenantId: number;
+    weekDayTimings: WeekDayTimingsDto[];
 
 
     constructor(data?: IEventManagementWeekDaysDto) {
@@ -36,6 +40,12 @@ static fromJS(data: any): EventManagementWeekDaysDto {
         this.id = _data['id'];
         this.tenantId = _data['tenantId'];
 
+        if (Array.isArray(_data['weekDayTimings'])) {
+            this.weekDayTimings = [] as any;
+            for (const item of _data['weekDayTimings']) {
+              this.weekDayTimings.push(WeekDayTimingsDto.fromJS(item));
+            }
+          }
         }
     }
 
@@ -45,6 +55,12 @@ static fromJS(data: any): EventManagementWeekDaysDto {
         data['eventId'] = this.eventId;
         data['id'] = this.id;
         data['tenantId'] = this.tenantId;
+        if (Array.isArray(this.weekDayTimings)) {
+            data['weekDayTimings'] = [];
+            for (const item of this.weekDayTimings) {
+              data['weekDayTimings'].push(item.toJSON());
+            }
+          }
 
         return data;
     }

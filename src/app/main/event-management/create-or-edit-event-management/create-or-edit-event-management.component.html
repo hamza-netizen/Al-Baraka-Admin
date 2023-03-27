@@ -1,5 +1,5 @@
 <div appBsModal #createOrEditEventManagement="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditEventManagement" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <form *ngIf="active" #eventManagementForm="ngForm" novalidate (ngSubmit)="save(eventManagement?.id)" autocomplete="new-password">
                 <div class="modal-header">
@@ -33,12 +33,12 @@
 
                     <div class="form-group col-md-6 mt-5 mb-5">
                       <label for="detail" class="form-label" for="detail">{{"detail" | localize}}</label>
-                      <input id="detail" class="form-control" type="text" name="detail" [(ngModel)]="eventManagement.detail">
+                      <textarea cdkTextareaAutosize pInputTextarea id="detail" class="form-control" type="text" name="detail" [(ngModel)]="eventManagement.detail"> </textarea>
                     </div>       
-                    <div class="form-group col-md-6 mt-5 mb-5">
+                    <!-- <div class="form-group col-md-6 mt-5 mb-5">
                         <label for="banner" class="form-label" for="banner">{{"banner" | localize}}</label>
                         <input id="banner" class="form-control" type="text" name="banner" [(ngModel)]="eventManagement.banner">
-                    </div> 
+                    </div>  -->
                     <div class="form-group col-md-6 mt-5 mb-5">
                         <label for="minimumSeats" class="form-label" for="minimumSeats">{{"minimumSeats" | localize}}</label>
                         <input id="minimumSeats" class="form-control" type="text" name="minimumSeats" [(ngModel)]="eventManagement.minimumSeats">
@@ -47,6 +47,16 @@
                         <label for="maximumSeats" class="form-label" for="maximumSeats">{{"maximumSeats" | localize}}</label>
                         <input id="maximumSeats" class="form-control" type="text" name="maximumSeats" [(ngModel)]="eventManagement.maximumSeats">
                     </div> 
+
+                    <div class="p-fluid p-grid p-formgrid col-md-6 mt-5 mb-3">
+                      <label class="form-label col-lg-12" for="title">{{ 'Start Date' | localize }}</label>
+                      <p-calendar id="startDate" name="startDate" [(ngModel)]="eventManagement.startDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="icon"></p-calendar>
+                    </div>
+    
+                    <div class="p-fluid p-grid p-formgrid col-md-6 mt-5 mb-3">
+                        <label class="form-label col-lg-12" for="title">{{ 'End Date' | localize }}</label>
+                        <p-calendar id="endDate" name="endDate" [(ngModel)]="eventManagement.endDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="id"></p-calendar>
+                    </div>
                     <div class="form-group col-md-6 mt-5 mb-5">
                         <label class="form-label" for="displayOrder">{{"Display Order" | localize}} </label>
                         <input id="displayOrder" class="form-control" type="text" name="displayOrder" [(ngModel)]="eventManagement.displayOrder"  maxlength="10">

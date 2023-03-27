@@ -23,6 +23,9 @@ import { TableModule } from 'primeng/table';
 import { AppCommonModule } from './common/app-common.module';
 import { ThemesLayoutBaseComponent } from './layout/themes/themes-layout-base.component';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { CalendarModule } from 'primeng/calendar';
+import { InputTextareaModule } from 'primeng/inputtextarea';
+
 
 const imports = [
     CommonModule,
@@ -48,7 +51,9 @@ const imports = [
     AutoCompleteModule,
     NgxSpinnerModule,
     AppBsModalModule,
-    MultiSelectModule
+    MultiSelectModule,
+    CalendarModule,
+    InputTextareaModule
 ];
 
 @NgModule({

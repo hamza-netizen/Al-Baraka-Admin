@@ -13,6 +13,8 @@ export interface IEventManagementDto {
     isPublished: boolean;
     displayOrder: number;
     tenantId: number;
+    startDate: Date;
+    endDate: Date;
     translations: TranslationEditDto[];
     eventManagementCategoryMappings: EventManagementCategoryMappingDto[];
     eventManagementWeekDays: EventManagementWeekDaysDto[];
@@ -36,6 +38,8 @@ static fromJS(data: any): EventManagementDto {
     isPublished: boolean;
     displayOrder: number;
     tenantId: number;
+    startDate: Date;
+    endDate: Date;
     translations: TranslationEditDto[];
     eventManagementCategoryMappings: EventManagementCategoryMappingDto[];
     eventManagementWeekDays: EventManagementWeekDaysDto[];
@@ -60,6 +64,8 @@ static fromJS(data: any): EventManagementDto {
         this.refundAllowed = _data['refundAllowed'];
         this.isPublished = _data['isPublished'];
         this.displayOrder = _data['displayOrder'];
+        this.startDate = _data['startDate'];
+        this.endDate = _data['endDate'];
         this.id = _data['id'];
         this.tenantId = _data['tenantId'];
 
@@ -97,6 +103,8 @@ static fromJS(data: any): EventManagementDto {
         data['refundAllowed'] = this.refundAllowed;
         data['isPublished'] = this.isPublished;
         data['displayOrder'] = this.displayOrder;
+        data['startDate'] = this.startDate;
+        data['endDate'] = this.endDate;
         data['id'] = this.id;
         data['tenantId'] = this.tenantId;
 
