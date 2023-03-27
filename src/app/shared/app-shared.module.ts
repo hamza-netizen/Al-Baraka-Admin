@@ -22,6 +22,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
 import { TableModule } from 'primeng/table';
 import { AppCommonModule } from './common/app-common.module';
 import { ThemesLayoutBaseComponent } from './layout/themes/themes-layout-base.component';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 const imports = [
     CommonModule,
@@ -47,6 +48,7 @@ const imports = [
     AutoCompleteModule,
     NgxSpinnerModule,
     AppBsModalModule,
+    MultiSelectModule
 ];
 
 @NgModule({

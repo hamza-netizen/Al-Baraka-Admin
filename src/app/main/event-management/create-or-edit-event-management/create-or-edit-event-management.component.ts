@@ -1,3 +1,5 @@
+import { EventManagementCategoryMappingDto } from './../../../../shared/Interfaces/event-management-category-mapping-dto.model';
+import { CategoryDto } from './../../../../shared/Interfaces/category-dto.model';
 import { EventManagementDto, IEventManagementDto } from '@shared/Interfaces/event-management-dto.model';
 import { Component, EventEmitter, Injector, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
@@ -17,12 +19,16 @@ import { EventManagementService } from '@shared/services/event-management.servic
 })
 
 export class CreateOrEditEventManagementComponent extends AppComponentBase {
-  @ViewChild('createOrEditEventManagement', { static: true }) modal: ModalDirective;
 
+  @ViewChild('createOrEditEventManagement', { static: true }) modal: ModalDirective;
   @Output() modalSave: EventEmitter<any> = new EventEmitter<any>();
+
   active = false;
   saving = false;
   eventManagement = {} as IEventManagementDto;
+  selectedEventCategory: number[] = [];
+  eventCategory: CategoryDto[] = [];
+  price: number;
 
   constructor(
     injector: Injector, 
@@ -51,6 +57,18 @@ export class CreateOrEditEventManagementComponent extends AppComponentBase {
     });
   }
 }
+
+bindCategory(event:any){
+
+  this.selectedEventCategory.forEach(value =>{
+    let category = new EventManagementCategoryMappingDto();
+    category.id = value; 
+    this.eventManagement.eventManagementCategoryMappings.push(category);
+});
+}
+
+
+
 
   prepareTranslationModels(editMode = false): void {
   if (!editMode) {
@@ -90,12 +108,12 @@ save(Id?: number): void {
         this.close();
       });
 
-  //   if(this.category.eventCategoryMappings){
-  //     this.category.eventCategoryMappings.forEach(eventCategory => {
-  //       eventCategory.categoryId = this.category.id;
-  //       this.category.eventCategoryMappings.push(eventCategory);
-  //   });
-  // }
+      if(this.eventManagement.eventManagementCategoryMappings){
+        this.eventManagement.eventManagementCategoryMappings.forEach(event =>{
+          event.price = this.price
+        })
+      }
+
 }
 
 close(): void {

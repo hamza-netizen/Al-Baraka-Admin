@@ -2,24 +2,6 @@ import { TranslationEditDto } from '@shared/Interfaces/translation-edit-dto.mode
 import { EventCategoryMappingDto } from './event-category-mapping-dto.model';
 
 export interface ICategoryDto {
-    abbreviation: string | undefined;
-    isPublished: boolean;
-    displayOrder: number;
-    status: boolean;
-    tenantId: number;
-    venueId: number ;
-    eventCategoryMappings: EventCategoryMappingDto[];
-    translations: TranslationEditDto[];
-    id: number;
-}
-export class CategoryDto implements ICategoryDto {
-  static fromJS(data: any): CategoryDto {
-    data = typeof data === 'object' ? data : {};
-    const result = new CategoryDto();
-    result.init(data);
-    return result;
-  }
-
   abbreviation: string | undefined;
   isPublished: boolean;
   displayOrder: number;
@@ -29,6 +11,25 @@ export class CategoryDto implements ICategoryDto {
   eventCategoryMappings: EventCategoryMappingDto[];
   translations: TranslationEditDto[];
   id: number;
+}
+export class CategoryDto implements ICategoryDto {
+  
+  abbreviation: string | undefined;
+  isPublished: boolean;
+  displayOrder: number;
+  status: boolean;
+  tenantId: number;
+  venueId: number ;
+  eventCategoryMappings: EventCategoryMappingDto[];
+  translations: TranslationEditDto[];
+  id: number;
+  
+  static fromJS(data: any): CategoryDto {
+    data = typeof data === 'object' ? data : {};
+    const result = new CategoryDto();
+    result.init(data);
+    return result;
+  }
 
   constructor(data?: ICategoryDto) {
     if (data) {

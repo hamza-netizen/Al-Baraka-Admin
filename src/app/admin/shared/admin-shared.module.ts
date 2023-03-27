@@ -29,6 +29,8 @@ import { AppBsModalModule } from '@shared/common/appBsModal/app-bs-modal.module'
 import { FileUploadModule } from 'ng2-file-upload';
 import { FileUploadModule as PrimeNgFileUploadModule } from 'primeng/fileupload';
 import { SubheaderModule } from '@app/shared/common/sub-header/subheader.module';
+import { MultiSelectModule } from 'primeng/multiselect';
+
 
 @NgModule({
     declarations: [
@@ -66,6 +68,7 @@ import { SubheaderModule } from '@app/shared/common/sub-header/subheader.module'
         FileUploadModule,
         PrimeNgFileUploadModule,
         SubheaderModule,
+        MultiSelectModule
     ],
     exports: [
         RoleComboComponent,
