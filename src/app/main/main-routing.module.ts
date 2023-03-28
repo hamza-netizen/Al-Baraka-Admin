@@ -15,11 +15,13 @@ import { RouterModule } from '@angular/router';
                     { path: 'category', loadChildren: () => import('./category/category.module').then(m => m.CategoryModule) },
                     { path: 'category/:Id', loadChildren: () => import('./category/category.module').then(m => m.CategoryModule) },
                     { path: 'event-management', loadChildren: () => import('./event-management/event-management.module').then(m => m.EventManagementModule) },
-
+                    { path: 'voucher', loadChildren: () => import('./voucher/voucher.module').then(m => m.VoucherModule) },
+                    { path: 'box-office', loadChildren: () => import('./box-office/box-office.module').then(m => m.BoxOfficeModule) },
                     { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
                     { path: '**', redirectTo: 'dashboard' },
                 ],
             },
+
         ]),
     ],
     exports: [RouterModule],

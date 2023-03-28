@@ -29,7 +29,7 @@ export class BoxOfficeService {
   
   }
   
-  getAll(MasterFilter?: string | undefined,  sorting?: string | null | undefined, skipCount?: number | undefined, maxResultCount?: number | undefined): Observable<IResultDto<IBoxOfficeDto>> 
+  getAllPaged(MasterFilter?: string | undefined,  sorting?: string | null | undefined, skipCount?: number | undefined, maxResultCount?: number | undefined): Observable<IResultDto<IBoxOfficeDto>> 
   {
     let url_ =  '/api/services/app/BoxOffice/GetAllPaged?';
 

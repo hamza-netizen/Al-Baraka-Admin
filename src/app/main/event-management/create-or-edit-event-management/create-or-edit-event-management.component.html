@@ -10,75 +10,96 @@
                     <button type="button" class="close" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving"></button>
                 </div>
                 <div class="modal-body">
-                  <div class="row">
-                    <div class="form-group mb-5">
-                      <multi-lingual-editor [translations]="eventManagement.translations">
-                        <ng-container *multiLingualEditorTranslation="let i = index; let default = first">
-                          <div class="form-group mb-5" >
-                            <label class="form-label" for="[{{ i }}].name">
-                              {{ "Name" | localize }}
-                            </label>
-                              <input type="text" class="form-control form-info" id="[{{ i }}].name" name="[{{ i }}].name" [(ngModel)]="(eventManagement?.translations)[i].name" 
-                              [required]="default" maxlength="64" #nameModel="ngModel" #nameEl/>
-                          </div>
-                        </ng-container>
-                      </multi-lingual-editor>
-                    </div>
-
-                    <div class="form-group col-md-6 mt-5 mb-5">
-                      <label class="form-label col-lg-12 " for="MultiSelectInput">{{"Category" | localize}}</label>
-                      <p-multiSelect (onChange)="bindCategory($event.value)" name="eventCategoryMapping" [options]="eventCategory" placeholder="Select Event Category" 
-                        optionLabel="name" optionValue="id" [(ngModel)]="selectedEventCategory" display="chip"></p-multiSelect>
-                    </div>
-
-                    <div class="form-group col-md-6 mt-5 mb-5">
-                      <label for="detail" class="form-label" for="detail">{{"detail" | localize}}</label>
-                      <textarea cdkTextareaAutosize pInputTextarea id="detail" class="form-control" type="text" name="detail" [(ngModel)]="eventManagement.detail"> </textarea>
-                    </div>       
-                    <!-- <div class="form-group col-md-6 mt-5 mb-5">
-                        <label for="banner" class="form-label" for="banner">{{"banner" | localize}}</label>
-                        <input id="banner" class="form-control" type="text" name="banner" [(ngModel)]="eventManagement.banner">
-                    </div>  -->
-                    <div class="form-group col-md-6 mt-5 mb-5">
-                        <label for="minimumSeats" class="form-label" for="minimumSeats">{{"minimumSeats" | localize}}</label>
-                        <input id="minimumSeats" class="form-control" type="text" name="minimumSeats" [(ngModel)]="eventManagement.minimumSeats">
-                    </div>       
-                    <div class="form-group col-md-6 mt-5 mb-5">
-                        <label for="maximumSeats" class="form-label" for="maximumSeats">{{"maximumSeats" | localize}}</label>
-                        <input id="maximumSeats" class="form-control" type="text" name="maximumSeats" [(ngModel)]="eventManagement.maximumSeats">
-                    </div> 
-
-                    <div class="p-fluid p-grid p-formgrid col-md-6 mt-5 mb-3">
-                      <label class="form-label col-lg-12" for="title">{{ 'Start Date' | localize }}</label>
-                      <p-calendar id="startDate" name="startDate" [(ngModel)]="eventManagement.startDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="icon"></p-calendar>
-                    </div>
+                  <tabset >
+                    <tab heading="Event Info" class="mt-5 ml-2">
+                      <div class="row">
+                        <div class="form-group mb-5">
+                          <multi-lingual-editor [translations]="eventManagement.translations">
+                            <ng-container *multiLingualEditorTranslation="let i = index; let default = first">
+                              <div class="form-group mb-5" >
+                                <label class="form-label" for="[{{ i }}].name">
+                                  {{ "Name" | localize }}
+                                </label>
+                                  <input type="text" class="form-control form-info" id="[{{ i }}].name" name="[{{ i }}].name" [(ngModel)]="(eventManagement?.translations)[i].name" 
+                                  [required]="default" maxlength="64" #nameModel="ngModel" #nameEl/>
+                              </div>
+                            </ng-container>
+                          </multi-lingual-editor>
+                        </div>
     
-                    <div class="p-fluid p-grid p-formgrid col-md-6 mt-5 mb-3">
-                        <label class="form-label col-lg-12" for="title">{{ 'End Date' | localize }}</label>
-                        <p-calendar id="endDate" name="endDate" [(ngModel)]="eventManagement.endDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="id"></p-calendar>
+                        <div class="form-group mt-5 mb-5">
+                          <label for="detail" class="form-label" for="detail">{{"Details" | localize}}</label>
+                          <textarea cdkTextareaAutosize pInputTextarea id="detail" class="form-control" type="text" name="detail" [(ngModel)]="eventManagement.detail"> </textarea>
+                        </div>  
+    
+                        <div class="form-group mt-5 mb-5">
+                          <label class="form-label col-lg-12 " for="MultiSelectInput">{{"Category" | localize}}</label>
+                          <p-multiSelect class="form-control" (onChange)="bindCategory($event.value)" name="eventCategoryMapping" [options]="eventCategory" placeholder="Select Event Category" 
+                            optionLabel="name" optionValue="id" [(ngModel)]="selectedEventCategory" display="chip"></p-multiSelect>
+                        </div>
+    
+                        <div class="form-group col-md-6 mt-5 mb-5">
+                            <label for="minimumSeats" class="form-label" for="minimumSeats">{{"minimumSeats" | localize}}</label>
+                            <input id="minimumSeats" class="form-control" type="number" name="minimumSeats" [(ngModel)]="eventManagement.minimumSeats">
+                        </div>       
+                        <div class="form-group col-md-6 mt-5 mb-5">
+                            <label for="maximumSeats" class="form-label" for="maximumSeats">{{"maximumSeats" | localize}}</label>
+                            <input id="maximumSeats" class="form-control" type="number" name="maximumSeats" [(ngModel)]="eventManagement.maximumSeats">
+                        </div> 
+    
+                        <div class="p-fluid p-grid p-formgrid col-md-6 mt-5 mb-3">
+                          <label class="form-label col-lg-12" for="title">{{ 'Start Date' | localize }}</label>
+                          <p-calendar id="startDate" name="startDate" [(ngModel)]="eventManagement.startDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="icon"></p-calendar>
+                        </div>
+        
+                        <div class="p-fluid p-grid p-formgrid col-md-6 mt-5 mb-3">
+                            <label class="form-label col-lg-12" for="title">{{ 'End Date' | localize }}</label>
+                            <p-calendar id="endDate" name="endDate" [(ngModel)]="eventManagement.endDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="id"></p-calendar>
+                        </div>
+                        <div class="form-group col-md-6 mt-5 mb-5">
+                            <label class="form-label" for="displayOrder">{{"Display Order" | localize}} </label>
+                            <input id="displayOrder" class="form-control" type="text" name="displayOrder" [(ngModel)]="eventManagement.displayOrder"  maxlength="10">
+                        </div>  
+                    
                     </div>
-                    <div class="form-group col-md-6 mt-5 mb-5">
-                        <label class="form-label" for="displayOrder">{{"Display Order" | localize}} </label>
-                        <input id="displayOrder" class="form-control" type="text" name="displayOrder" [(ngModel)]="eventManagement.displayOrder"  maxlength="10">
-                    </div>  
-                  </div>
-                 
-                  <div class="mt-9">
-                      <label for="refundAllowed" class="form-check form-check-custom form-check-solid py-1">
-                      <input id="refundAllowed" class="form-check-input" type="checkbox" name="refundAllowed" [(ngModel)]="eventManagement.refundAllowed">
-                        <span class="form-check-label">
-                          {{ 'refundAllowed' | localize }}
-                      </span> 
-                    </label>
-                  </div> 
-                  <div>
-                    <label for="published" class="form-check form-check-custom form-check-solid py-1">
-                        <input id="published" class="form-check-input" type="checkbox" name="published" [(ngModel)]="eventManagement.isPublished">
-                        <span class="form-check-label">
-                          {{ 'published' | localize }}
-                      </span> 
-                    </label>
-                  </div> 
+
+                      <div class="form-group col-md-6 mt-5 mb-5">
+                                        
+                        <button *ngIf="!banner" (click)="crop('banner')" type="button" class="btn btn-primary" style="width: 40rem ; ">
+                            {{"Select banner" | localize}}</button>
+                        <button *ngIf="banner" (click)="crop('banner')" type="button" class="btn btn-dark" style="width: 40rem ; ">
+                            {{"Change banner" | localize}}</button>
+    
+                        <div *ngIf="banner"  class="col-md-8 row mt-5">
+                            <div class="form-group col-md-4">
+                                <img [src]="banner" style="width: 250px;" alt="">
+                            </div>
+                            <div class="form-group col-md-12 mt-2">
+                                <button type="button" class="btn btn-danger" (click)="deleteImage('banner')">{{"Delete banner" | localize}}</button>
+                            </div>
+                        </div>
+    
+                      </div>
+
+                      <div class="mt-9">
+                          <label for="refundAllowed" class="form-check form-check-custom form-check-solid py-1">
+                          <input id="refundAllowed" class="form-check-input" type="checkbox" name="refundAllowed" [(ngModel)]="eventManagement.refundAllowed">
+                            <span class="form-check-label">
+                              {{ 'refundAllowed' | localize }}
+                          </span> 
+                        </label>
+                      </div> 
+                      <div>
+                        <label for="published" class="form-check form-check-custom form-check-solid py-1">
+                            <input id="published" class="form-check-input" type="checkbox" name="published" [(ngModel)]="eventManagement.isPublished">
+                            <span class="form-check-label">
+                              {{ 'published' | localize }}
+                          </span> 
+                        </label>
+                      </div> 
+                    </tab>
+                  </tabset>
+          
                 </div>
                
             <div class="modal-footer">     

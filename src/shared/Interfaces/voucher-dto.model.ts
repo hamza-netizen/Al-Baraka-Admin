@@ -9,13 +9,7 @@ export interface IVoucherDto {
 }
 
 export class VoucherDto implements IVoucherDto {
-    static fromJS(data: any): VoucherDto {
-      data = typeof data === 'object' ? data : {};
-      const result = new VoucherDto();
-      result.init(data);
-      return result;
-    }
-  
+
     id: number;
     code: string;
     voucherType: number;
@@ -24,6 +18,13 @@ export class VoucherDto implements IVoucherDto {
     eventId: number;
     isPublished: boolean;
 
+    static fromJS(data: any): VoucherDto {
+      data = typeof data === 'object' ? data : {};
+      const result = new VoucherDto();
+      result.init(data);
+      return result;
+    }
+  
     constructor(data?: IVoucherDto) {
       if (data) {
         // tslint:disable-next-line:prefer-const

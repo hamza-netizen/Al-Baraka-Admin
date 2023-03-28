@@ -7,9 +7,13 @@ import { AppComponentBase } from '@shared/common/app-component-base';
 import { TranslationEditDto } from '@shared/interfaces/translation-edit-dto.model';
 import { MultiLingualModelService } from '@shared/translation-editor/multi-lingual-model.service';
 import * as _ from 'lodash';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalDirective } from 'ngx-bootstrap/modal';
 import { finalize } from 'rxjs/operators';
 import { EventManagementService } from '@shared/services/event-management.service';
+import { CropOutput } from '@shared/Interfaces/crop-settings-dto.model';
+import { CropImageComponent } from '@shared/crop-image/crop-image.component';
+import { CropSettingService } from '@shared/services/crop-setting.service';
+import * as moment from 'moment';
 
 @Component({
   selector: 'createOrEditEventManagement',
@@ -25,50 +29,83 @@ export class CreateOrEditEventManagementComponent extends AppComponentBase {
 
   active = false;
   saving = false;
+  isEdit = false;
+  loading = true;
+  showDetails = false;
+
   eventManagement = {} as IEventManagementDto;
   selectedEventCategory: number[] = [];
   eventCategory: CategoryDto[] = [];
   price: number;
+  banner: string;
+  outputcrop: CropOutput = new CropOutput();
+  bsModalRef: BsModalRef;
+
 
   constructor(
     injector: Injector, 
     private _eventManagementService: EventManagementService, 
     private _multiLingualModelService: MultiLingualModelService,
+    private _cropSetting: CropSettingService,
+    private _bsModalService: BsModalService,
     private router: Router
   ){
       super(injector);
   }
 
-  showEventManagement(Id?: number): void {   
-  if (!Id) {
-    console.log('create');
-    this.clear();
-    this.active = true;
-    this.prepareTranslationModels();
-    this.modal.show();
-  } else {
-    this._eventManagementService.getForEdit(Id).subscribe((result) => {     
-      this.eventManagement = result;
-      if (Id) {
+  showEventManagement(Id?: number): void { 
+    
+    this.isEdit = true;
+    if (!Id) {
+      console.log('create');
+      this.clear();
+      this.active = true;
+      this.prepareTranslationModels();
+      this.modal.show();
+    } 
+    else {
+      this._eventManagementService.getForEdit(Id).subscribe((result) => {     
+        this.eventManagement = result;
+
+        this.eventManagement.startDate = moment(this.eventManagement.startDate,'YYYY-MM-DD' ).toDate();
+        this.eventManagement.endDate = moment(this.eventManagement.endDate,'YYYY-MM-DD' ).toDate();
+
         this.active = true;
         this.prepareTranslationModels(true);
-      }
-      this.modal.show();
-    });
+        this.modal.show();
+      });
+    }
+}
+
+  save(Id?: number): void {
+
+    this.eventManagement.startDate.toISOString();
+    this.eventManagement.endDate.toISOString();
+
+    this._eventManagementService
+      .addOrEdit(this.eventManagement)
+      .pipe(finalize(() => (this.saving = false)))
+      .subscribe(() => {  
+        this.notify.info(this.l('SavedSuccessfully')); 
+        this.close();
+      });
+    
+      // if(this.eventManagement.eventManagementCategoryMappings){
+      //   this.eventManagement.eventManagementCategoryMappings.forEach(event =>{
+      //     event.price = this.price
+      //   })
+      // }
+      this.saving = true;
   }
-}
 
-bindCategory(event:any){
+  bindCategory(event:any){
 
-  this.selectedEventCategory.forEach(value =>{
-    let category = new EventManagementCategoryMappingDto();
-    category.id = value; 
-    this.eventManagement.eventManagementCategoryMappings.push(category);
-});
-}
-
-
-
+    this.selectedEventCategory.forEach(value =>{
+      let category = new EventManagementCategoryMappingDto();
+      category.id = value; 
+      this.eventManagement.eventManagementCategoryMappings.push(category);
+  });
+  }
 
   prepareTranslationModels(editMode = false): void {
   if (!editMode) {
@@ -96,24 +133,38 @@ bindCategory(event:any){
   );
 }
 
-save(Id?: number): void {
 
-  this.saving = true;
-    console.log('eventManagement', this.eventManagement);
-    this._eventManagementService
-      .addOrEdit(this.eventManagement)
-      .pipe(finalize(() => (this.saving = false)))
-      .subscribe(() => {  
-        this.notify.info(this.l('SavedSuccessfully')); 
-        this.close();
-      });
 
-      if(this.eventManagement.eventManagementCategoryMappings){
-        this.eventManagement.eventManagementCategoryMappings.forEach(event =>{
-          event.price = this.price
-        })
-      }
+crop(field? :string): void{
+  let initialState = null;
 
+  if (field === 'eventbanner'){
+    initialState = {
+      settings: this._cropSetting.setEventBanner()
+    };
+  }
+
+  this.bsModalRef = this._bsModalService.show(CropImageComponent, {
+    initialState,
+    class: 'modal-lg mt-9'
+  });
+  this.bsModalRef.content.cropevent.subscribe((result) => {
+    this.outputcrop = result;
+  
+    if (this.outputcrop.field === "eventbanner" ) {
+      this.banner = this.eventManagement.banner = this.outputcrop.croppedimage;
+    }
+    
+  });
+
+}
+
+deleteImage(field:string){
+
+  if (field === "eventbanner") {
+    this.banner = null;
+
+  }
 }
 
 close(): void {
@@ -127,6 +178,7 @@ reloadPage(): void {
 }
 
 clear(){
+  this.banner = null;
   this.eventManagement = new EventManagementDto();
 }
 //#endregion

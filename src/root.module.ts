@@ -32,6 +32,9 @@ import { NgxBootstrapDatePickerConfigService } from 'assets/ngx-bootstrap/ngx-bo
 import { LocaleMappingService } from '@shared/locale-mapping.service';
 import { NgxSpinnerModule, NgxSpinnerService } from 'ngx-spinner';
 import { DateTimeService } from '@app/shared/common/timing/date-time.service';
+import { CropImageComponent } from './shared/crop-image/crop-image.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 export function appInitializerFactory(injector: Injector, platformLocation: PlatformLocation) {
     return () => {
@@ -271,8 +274,9 @@ function handleLogoutRequest(authService: AppAuthService) {
         HttpClientModule,
         RootRoutingModule,
         NgxSpinnerModule,
+        ImageCropperModule
     ],
-    declarations: [RootComponent],
+    declarations: [RootComponent, CropImageComponent],
     providers: [
         { provide: API_BASE_URL, useFactory: getRemoteServiceBaseUrl },
         {

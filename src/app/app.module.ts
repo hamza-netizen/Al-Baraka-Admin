@@ -96,6 +96,7 @@ import { ScrollTopComponent } from './shared/layout/scroll-top.component';
 import { AppBsModalModule } from '@shared/common/appBsModal/app-bs-modal.module';
 import { SubheaderModule } from './shared/common/sub-header/subheader.module';
 
+
 @NgModule({
     declarations: [
         AppComponent,

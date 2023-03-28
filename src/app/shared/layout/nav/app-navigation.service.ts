@@ -22,7 +22,8 @@ export class AppNavigationService {
             ),
             new AppMenuItem('Category', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/category'),
             new AppMenuItem('Event Management', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/event-management'),
-
+            new AppMenuItem('Vouchers', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/voucher'),
+            new AppMenuItem('Event Box Office', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/box-office'),
             new AppMenuItem('Dashboard', 'Pages.Tenant.Dashboard', 'flaticon-line-graph', '/app/main/dashboard'),
             new AppMenuItem('Tenants', 'Pages.Tenants', 'flaticon-list-3', '/app/admin/tenants'),
             new AppMenuItem('Editions', 'Pages.Editions', 'flaticon-app', '/app/admin/editions'),

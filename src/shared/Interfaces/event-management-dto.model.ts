@@ -53,6 +53,11 @@ static fromJS(data: any): EventManagementDto {
             }
         }
         }
+        else{
+            this.translations = [];
+            this.eventManagementCategoryMappings = [];
+            this.eventManagementWeekDays = [];
+        }
     }
     init(_data?: any) {
         if (_data) {

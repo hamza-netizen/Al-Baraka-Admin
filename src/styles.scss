@@ -286,7 +286,13 @@ bs-days-calendar-view {
     margin-left: 3rem !important;
 }
 
+.ml-2{
+    margin-left: 1.5rem !important;
+}
 
+input.ng-dirty.ng-invalid {
+    color: red
+  }
 
 .p-multiselect, .p-dropdown {
     min-width: 100%;
