@@ -4,9 +4,13 @@ import { AppUrlService } from './nav/app-url.service';
 import { AppUiCustomizationService } from './ui/app-ui-customization.service';
 import { AppSessionService } from './session/app-session.service';
 import { CookieConsentService } from './session/cookie-consent.service';
+import { FilterArrayPipe } from './pipes/filter-array.pipe';
 
 @NgModule({
     imports: [CommonModule],
+    declarations: [
+      FilterArrayPipe
+    ],
 })
 export class AbpZeroTemplateCommonModule {
     static forRoot(): ModuleWithProviders<CommonModule> {

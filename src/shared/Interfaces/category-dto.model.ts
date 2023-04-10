@@ -2,25 +2,26 @@ import { TranslationEditDto } from '@shared/Interfaces/translation-edit-dto.mode
 import { EventCategoryMappingDto } from './event-category-mapping-dto.model';
 
 export interface ICategoryDto {
+
+  name: string;
   abbreviation: string | undefined;
   isPublished: boolean;
   displayOrder: number;
-  status: boolean;
   tenantId: number;
   venueId: number ;
-  eventCategoryMappings: EventCategoryMappingDto[];
+  // eventCategoryMappings: EventCategoryMappingDto[];
   translations: TranslationEditDto[];
   id: number;
 }
 export class CategoryDto implements ICategoryDto {
   
+  name: string;
   abbreviation: string | undefined;
   isPublished: boolean;
   displayOrder: number;
-  status: boolean;
   tenantId: number;
   venueId: number ;
-  eventCategoryMappings: EventCategoryMappingDto[];
+  // eventCategoryMappings: EventCategoryMappingDto[];
   translations: TranslationEditDto[];
   id: number;
   
@@ -42,7 +43,7 @@ export class CategoryDto implements ICategoryDto {
     }
     if (!data) {
       this.translations = [];
-      this.eventCategoryMappings = [];
+      // this.eventCategoryMappings = [];
 
     }
   }
@@ -53,6 +54,7 @@ export class CategoryDto implements ICategoryDto {
       this.displayOrder = _data['displayOrder'];
       this.tenantId = _data['tenantId'];
       this.venueId = _data['venueId'];
+      this.name = _data['name'];
 
       if (Array.isArray(_data['translations'])) {
         this.translations = [] as any;
@@ -60,12 +62,12 @@ export class CategoryDto implements ICategoryDto {
           this.translations.push(TranslationEditDto.fromJS(item));
         }
       }
-      if (Array.isArray(_data['eventCategoryMappings'])) {
-        this.eventCategoryMappings = [] as any;
-        for (const item of _data['eventCategoryMappings']) {
-          this.eventCategoryMappings.push(EventCategoryMappingDto.fromJS(item));
-        }
-      }
+      // if (Array.isArray(_data['eventCategoryMappings'])) {
+      //   this.eventCategoryMappings = [] as any;
+      //   for (const item of _data['eventCategoryMappings']) {
+      //     this.eventCategoryMappings.push(EventCategoryMappingDto.fromJS(item));
+      //   }
+      // }
       this.id = _data['id'];
     }
   }
@@ -75,9 +77,9 @@ export class CategoryDto implements ICategoryDto {
     data['abbreviation'] = this.abbreviation;
     data['isPublished'] = this.isPublished;
     data['displayOrder'] = this.displayOrder;
-    data['status'] = this.status;
     data['tenantId'] = this.tenantId;
     data['venueId'] = this.venueId;
+    data['name'] = this.name;
  
     data['id'] = this.id;
     if (Array.isArray(this.translations)) {
@@ -86,12 +88,12 @@ export class CategoryDto implements ICategoryDto {
         data['translations'].push(item.toJSON());
       }
     }
-    if (Array.isArray(this.eventCategoryMappings)) {
-        data['eventCategoryMappings'] = [];
-        for (const item of this.eventCategoryMappings) {
-          data['eventCategoryMappings'].push(item.toJSON());
-        }
-      }
+    // if (Array.isArray(this.eventCategoryMappings)) {
+    //     data['eventCategoryMappings'] = [];
+    //     for (const item of this.eventCategoryMappings) {
+    //       data['eventCategoryMappings'].push(item.toJSON());
+    //     }
+    //   }
     return data;
   }
 

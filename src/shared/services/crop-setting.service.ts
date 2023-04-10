@@ -9,7 +9,7 @@ export class CropSettingService {
     return {
         isNew: true,
         module: 'EventManagement',
-        field: 'eventbanner',
+        field: 'eventBanner',
         resizeToWidth: 0, // 210
         resizeToHeight: 0, // 333
         aspectRatio: 2.2 / 2.775,

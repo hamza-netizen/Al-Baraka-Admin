@@ -5,12 +5,15 @@ export interface IBoxOfficeDto {
     eventId:number;
     userId:number;
     BoxOfficeId:number;
+    categoryId: number;
+    tenantId: number;
     seatNo: string;
     price:number;
     isScanned: boolean;
     paymentMode: number;
     eventWeekDayTimingId:number;
     boxOfficePayment: BoxOfficePaymentDto[];
+    
 }
 
 export class BoxOfficeDto implements IBoxOfficeDto {
@@ -25,6 +28,8 @@ export class BoxOfficeDto implements IBoxOfficeDto {
     eventId:number;
     userId:number;
     BoxOfficeId:number;
+    categoryId: number;
+    tenantId: number;
     seatNo: string;
     price:number;
     isScanned: boolean;
@@ -48,6 +53,8 @@ export class BoxOfficeDto implements IBoxOfficeDto {
         this.eventId = _data['eventId'];
         this.userId = _data['userId'];
         this.BoxOfficeId = _data['BoxOfficeId'];
+        this.categoryId = _data['categoryId'];
+        this.tenantId = _data['tenantId'];
         this.seatNo = _data['seatNo'];
         this.price = _data['price'];
         this.isScanned = _data['isScanned'];
@@ -71,13 +78,15 @@ export class BoxOfficeDto implements IBoxOfficeDto {
       data['eventId'] = this.eventId;
       data['userId'] = this.userId;
       data['BoxOfficeId'] = this.BoxOfficeId;
+      data['categoryId'] = this.categoryId;
+      data['tenantId'] = this.tenantId;
       data['seatNo'] = this.seatNo;
       data['price'] = this.price;
       data['isScanned'] = this.isScanned;
       data['paymentMode'] = this.paymentMode;
       data['eventWeekDayTimingId'] = this.eventWeekDayTimingId;
       data['id'] = this.id;
-
+      
       if (Array.isArray(this.boxOfficePayment)) {
         data['boxOfficePayment'] = [];
         for (const item of this.boxOfficePayment) {

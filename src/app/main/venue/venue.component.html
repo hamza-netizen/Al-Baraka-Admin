@@ -1,6 +1,6 @@
 <div [@routerTransition]>
     <div class="content d-flex flex-column flex-column-fluid">
-        <sub-header [title]="'Event Management' | localize" [description]="'Event Management Header Info' | localize">
+        <sub-header [title]="'Venue' | localize" [description]="'Venue Header Info' | localize">
             <div role="actions">
 
                 <div class="btn-group" dropdown placement="button right">
@@ -15,7 +15,7 @@
                         class="dropdown-menu dropdown-menu-right dropdown-excel-operations" role="menu" *dropdownMenu
                         aria-labelledby="dropdownButtonExcelOperations">
                         <li role="menuitem">
-                            <a class="dropdown-item text-dark" id="ExportEventManagementToExcelButton"
+                            <a class="dropdown-item text-dark" id="ExportVenueToExcelButton"
                                 (click)="exportToExcel()" href="javascript:;">
                                 <i class="fa fa-download me-2 mt-1 text-dark" style="font-size: 1rem"></i>
                                 {{ 'ExportToExcel' | localize }}
@@ -27,7 +27,7 @@
                                 <small [innerHTML]="
                                         l(
                                             'ImportToExcelSampleFileDownloadInfo',
-                                            '<a href=/assets/sampleFiles/ImportEventManagementSampleFile.xlsx>' +
+                                            '<a href=/assets/sampleFiles/ImportVenueSampleFile.xlsx>' +
                                                 l('ClickHere') +
                                                 '</a>'
                                         )
@@ -36,11 +36,11 @@
                         </li>
                     </ul>
                 </div>
-                <!-- *ngIf="'Pages.Administration.EventManagement.Create' | permission" -->
-                <button (click)="createEventManagement()"
+                <!-- *ngIf="'Pages.Administration.Venue.Create' | permission" -->
+                <button (click)="createVenue()"
                     click="this.nav" class="btn btn-primary">
                     <i class="fa fa-plus"></i>
-                    {{ 'Create New Event Management' | localize }}
+                    {{ 'Create New Venue' | localize }}
                 </button>
             </div>
         </sub-header>
@@ -66,8 +66,8 @@
 
                             <div class="row mb-4" [hidden]="!advancedFiltersAreShown">
                                 <!-- [ngClass]="{
-                                    'col-md-6': ('Pages.Administration.EventManagement' | permission),
-                                    'col-md-12': !('Pages.Administration.EventManagement' | permission)
+                                    'col-md-6': ('Pages.Administration.Venue' | permission),
+                                    'col-md-12': !('Pages.Administration.Venue' | permission)
                                 }" -->
                                 <div >
                                     <div class="mb-5">
@@ -118,18 +118,14 @@
                                             {{ 'id' | localize }}
                                             <p-sortIcon field="id"></p-sortIcon>
                                         </th>
+
                                         <th pSortableColumn="name">
-                                            {{ 'Name' | localize }}
+                                            {{ 'name' | localize }}
                                             <p-sortIcon field="name"></p-sortIcon>
                                         </th>
 
-                                        <!-- <th pSortableColumn="abbreviation">
-                                            {{ 'Abbreviation' | localize }}
-                                            <p-sortIcon field="abbreviation"></p-sortIcon>
-                                        </th> -->
-
                                         <th pSortableColumn="isPublished">
-                                            {{ 'Active' | localize }}
+                                            {{ 'isPublished' | localize }}
                                             <p-sortIcon field="isPublished"></p-sortIcon>
                                         </th>
                                   
@@ -138,7 +134,7 @@
                                             <p-sortIcon field="displayOrder"></p-sortIcon>
                                         </th>
                                     
-                                        <!-- [hidden]=" !(['Pages.Administration.EventManagement.Edit','Pages.Administration.EventManagement.Delete'] | permissionAny)" -->
+                                        <!-- [hidden]=" !(['Pages.Administration.Venue.Edit','Pages.Administration.Venue.Delete'] | permissionAny)" -->
                                         <th >
                                             {{ 'Actions' | localize }}
                                         </th>
@@ -160,19 +156,12 @@
                                             {{ record.name }}
                                         </td>
                                         
-                                        <!-- <td>
-                                            <span class="p-column-title">
-                                                {{ 'Abbreviation' | localize }}
-                                            </span>
-                                            {{ record.abbreviation }}
-                                        </td> -->
-
                                         <td>
                                             <span class="p-column-title">{{ 'Published' | localize }}</span>
-                                            <span class="badge badge-success" *ngIf="record.isPublished">
+                                            <span class="badge badge-success" *ngIf="record.published">
                                                 {{ 'Yes' | localize }}
                                             </span>
-                                            <span class="badge badge-dark" *ngIf="!record.isPublished">
+                                            <span class="badge badge-dark" *ngIf="!record.published">
                                                 {{ 'No' | localize }}
                                             </span>
                                         </td>
@@ -184,7 +173,7 @@
                                             {{ record.displayOrder }}
                                         </td>
 
-                                        <!-- [hidden]=" !(['Pages.Administration.EventManagement.Edit','Pages.Administration.EventManagement.Delete'] | permissionAny)" -->
+                                        <!-- [hidden]=" !(['Pages.Administration.Venue.Edit','Pages.Administration.Venue.Delete'] | permissionAny)" -->
                                         <td >
                                             <div class="btn-group" dropdown placement="bottom left" container="body">
                                                 <button id="dropdownButton" type="button"
@@ -196,12 +185,13 @@
                                                 </button>
                                                 <ul id="dropdownMenu" class="dropdown-menu" role="menu" *dropdownMenu
                                                     aria-labelledby="dropdownButton">
-                                                    <!-- *ngIf="'Pages.Administration.EventManagement.Edit' | permission" -->
+                                                    <!-- *ngIf="'Pages.Administration.Venue.Edit' | permission" -->
                                                     <li 
                                                         role="menuitem">
                                                         <a href="javascript:;" class="dropdown-item"
-                                                        (click)="createOrEditEventManagement.showEventManagement(record.id)"
+                                                        (click)="createOrEditVenue.showVenueModal(record.id)"
                                                         > 
+
                                                             {{ 'Edit' | localize }}
                                                         </a>
                                                     </li>
@@ -238,7 +228,7 @@
             </div>
         </div>
 
-        <createOrEditEventManagement #createOrEditEventManagement (modalSave)="createEventManagement()"></createOrEditEventManagement>
+        <createOrEditVenue #createOrEditVenue (modalSave)="createVenue()"></createOrEditVenue>
 
     </div>
 </div>

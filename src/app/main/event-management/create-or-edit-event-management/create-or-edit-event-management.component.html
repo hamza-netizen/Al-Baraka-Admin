@@ -32,11 +32,7 @@
                           <textarea cdkTextareaAutosize pInputTextarea id="detail" class="form-control" type="text" name="detail" [(ngModel)]="eventManagement.detail"> </textarea>
                         </div>  
     
-                        <div class="form-group mt-5 mb-5">
-                          <label class="form-label col-lg-12 " for="MultiSelectInput">{{"Category" | localize}}</label>
-                          <p-multiSelect class="form-control" (onChange)="bindCategory($event.value)" name="eventCategoryMapping" [options]="eventCategory" placeholder="Select Event Category" 
-                            optionLabel="name" optionValue="id" [(ngModel)]="selectedEventCategory" display="chip"></p-multiSelect>
-                        </div>
+                      
     
                         <div class="form-group col-md-6 mt-5 mb-5">
                             <label for="minimumSeats" class="form-label" for="minimumSeats">{{"minimumSeats" | localize}}</label>
@@ -56,26 +52,28 @@
                             <label class="form-label col-lg-12" for="title">{{ 'End Date' | localize }}</label>
                             <p-calendar id="endDate" name="endDate" [(ngModel)]="eventManagement.endDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="id"></p-calendar>
                         </div>
-                        <div class="form-group col-md-6 mt-5 mb-5">
+                        <!-- <div class="form-group col-md-6 mt-5 mb-5">
                             <label class="form-label" for="displayOrder">{{"Display Order" | localize}} </label>
                             <input id="displayOrder" class="form-control" type="text" name="displayOrder" [(ngModel)]="eventManagement.displayOrder"  maxlength="10">
-                        </div>  
+                        </div>   -->
                     
                     </div>
 
+                    <hr>
+
                       <div class="form-group col-md-6 mt-5 mb-5">
                                         
-                        <button *ngIf="!banner" (click)="crop('banner')" type="button" class="btn btn-primary" style="width: 40rem ; ">
-                            {{"Select banner" | localize}}</button>
-                        <button *ngIf="banner" (click)="crop('banner')" type="button" class="btn btn-dark" style="width: 40rem ; ">
-                            {{"Change banner" | localize}}</button>
+                        <button *ngIf="!eventBanner" (click)="crop('eventBanner')" type="button" class="btn btn-primary" style="width: 40.5rem ; ">
+                            {{"Select Event Banner" | localize}}</button>
+                        <button *ngIf="eventBanner" (click)="crop('eventBanner')" type="button" class="btn btn-dark" style="width: 40.5rem ; ">
+                            {{"Change Event banner" | localize}}</button>
     
-                        <div *ngIf="banner"  class="col-md-8 row mt-5">
+                        <div *ngIf="eventBanner"  class="col-md-8 row mt-5">
                             <div class="form-group col-md-4">
-                                <img [src]="banner" style="width: 250px;" alt="">
+                                <img [src]="eventBanner" style="width: 250px;" alt="">
                             </div>
                             <div class="form-group col-md-12 mt-2">
-                                <button type="button" class="btn btn-danger" (click)="deleteImage('banner')">{{"Delete banner" | localize}}</button>
+                                <button type="button" class="btn btn-danger" (click)="deleteImage('eventBanner')">{{"Delete banner" | localize}}</button>
                             </div>
                         </div>
     
@@ -98,6 +96,39 @@
                         </label>
                       </div> 
                     </tab>
+                    <tab heading="Event Schedule">
+                      <div class="form-group mt-5 mb-5">
+                        <label class="form-label col-lg-12 " for="MultiSelectInput">{{"Category" | localize}}</label>
+                        <p-multiSelect (onChange)="bindCategory()" name="eventCategory" [options]="categories" placeholder="Select Event Category" 
+                          optionLabel="name" optionValue="id" [(ngModel)]="selectedEventCategory" display="chip"></p-multiSelect>
+                      </div>
+                      <!-- <button (click)="addCategory()" ></button> -->
+                      <!-- <tabset [classList]="'verticalTab row'" [vertical]="true" type="pills">
+                        
+                      </tabset> -->
+                      <div class="row" *ngFor="let cat of eventManagement.eventManagementCategoryMappings; let i=index">
+                        <div class="form-group col-md-6 mt-5 mb-5">
+                          <label class="form-label" for="price">{{"Price" | localize}} </label>
+                          <input id="price" class="form-control" type="number" [name]="'price' + i" [(ngModel)]="cat.price"  maxlength="10">
+                        </div>  
+  
+                         <div class="form-group col-md-6 mt-5 mb-5">
+                          <label class="form-label" for="noOfSeats">{{"Seats" | localize}} </label>
+                          <input id="noOfSeats" class="form-control" type="number" [name]="'noOfSeats' + i" [(ngModel)]="cat.noOfSeats"  maxlength="10">
+                        </div>  
+                      </div>
+
+                      <select id="weekday-dropdown">
+                        <option  value="">Select a day</option>
+                        <ng-container  *ngFor="let weekday of weekdays">
+                          <option value="{{ weekday.id }}">{{ weekday.name }}</option>
+                        </ng-container>
+                      </select>
+
+                      <p-dropdown (onChange)="getDays()" [options]="weekdays" [(ngModel)]="selectedWeekDayIds" optionLabel="weekday" optionValue="weekday"></p-dropdown>
+
+
+                    </tab>
                   </tabset>
           
                 </div>
@@ -111,4 +142,3 @@
             </form>
         </div>
     </div>
-</div>

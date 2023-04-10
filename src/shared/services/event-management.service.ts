@@ -10,6 +10,16 @@ import { IEventManagementDto } from '@shared/interfaces/event-management-dto.mod
 import { IRootObjectDto } from '@shared/interfaces/root-object-dto.model';
 import { IResultDto } from '@shared/interfaces/result-dto.model';
 
+export enum WeekDay {
+  Sunday,
+  Monday,
+  Tuesday,
+  Wednesday,
+  Thursday,
+  Friday,
+  Saturday
+}
+
 @Injectable({  
   providedIn: 'root'
 })
@@ -18,6 +28,7 @@ import { IResultDto } from '@shared/interfaces/result-dto.model';
 export class EventManagementService {
   private http: HttpClient;
   private baseUrl: string;
+  
 
   protected jsonParseReviver: ((key: string, value: any) => any) | undefined = undefined;
 
@@ -99,6 +110,14 @@ export class EventManagementService {
           url_ = url_.replace(/[?&]$/, "");
 
           return this.http.delete<void>(url_);
+  }
+
+  getWeekdays() {
+    let Weekdays = Object.keys(WeekDay)
+    .filter(key => typeof WeekDay[key as any] === 'number')
+    .map(key => ({ id: WeekDay[key as any], name: key }));
+
+    return Weekdays;
   }
 
 //   getToExcel(filter: string, sorting: string | undefined): Observable<FileDto> {

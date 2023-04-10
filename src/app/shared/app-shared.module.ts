@@ -25,6 +25,7 @@ import { ThemesLayoutBaseComponent } from './layout/themes/themes-layout-base.co
 import { MultiSelectModule } from 'primeng/multiselect';
 import { CalendarModule } from 'primeng/calendar';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 
 
@@ -54,7 +55,8 @@ const imports = [
     AppBsModalModule,
     MultiSelectModule,
     CalendarModule,
-    InputTextareaModule
+    InputTextareaModule,
+    RadioButtonModule
 ];
 
 @NgModule({

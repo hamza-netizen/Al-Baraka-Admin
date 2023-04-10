@@ -22,6 +22,7 @@ export class AppNavigationService {
             ),
             new AppMenuItem('Category', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/category'),
             new AppMenuItem('Event Management', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/event-management'),
+            new AppMenuItem('Venue', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/venue'),
             new AppMenuItem('Vouchers', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/voucher'),
             new AppMenuItem('Event Box Office', 'Pages.Administration.Users', 'flaticon-line-graph', '/app/main/box-office'),
             new AppMenuItem('Dashboard', 'Pages.Tenant.Dashboard', 'flaticon-line-graph', '/app/main/dashboard'),

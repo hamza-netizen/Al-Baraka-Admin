@@ -8,21 +8,21 @@ import { finalize } from 'rxjs/operators';
 import * as moment from 'moment';
 import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { FileDownloadService } from '@shared/utils/file-download.service';
-import { VoucherService } from '@shared/services/voucher.service';
-import { IVoucherDto } from '@shared/interfaces/voucher-dto.model';
-import { CreateOrEditVoucherComponent } from './create-or-edit-voucher/create-or-edit-voucher.component';
+import { VenueService } from '@shared/services/venue.service';
+import { IVenueDto } from '@shared/interfaces/venue-dto.model';
+import { CreateOrEditVenueComponent } from './create-or-edit-venue/create-or-edit-venue.component';
 
 
 @Component({
-  selector: 'app-voucher',
-  templateUrl: './voucher.component.html',
-  styleUrls: ['./voucher.component.css'],
-    animations: [appModuleAnimation()],
+  selector: 'app-venue',
+  templateUrl: './venue.component.html',
+  styleUrls: ['./venue.component.css'],
+  animations: [appModuleAnimation()],
 })
-export class VoucherComponent extends AppComponentBase {
-  @ViewChild('createOrEditVoucher', { static: true }) createOrEditVoucher: CreateOrEditVoucherComponent;
+export class VenueComponent extends AppComponentBase {
+  @ViewChild('createOrEditVenue', { static: true }) createOrEditVenue: CreateOrEditVenueComponent;
 
-  voucherList: IVoucherDto[];
+  venueList: IVenueDto[];
 
   @ViewChild('dataTable', { static: true }) dataTable: Table;
   @ViewChild('paginator', { static: true }) paginator: Paginator;
@@ -35,7 +35,7 @@ export class VoucherComponent extends AppComponentBase {
   ];
   constructor(
     injector: Injector,
-    private _voucherService: VoucherService,
+    private venueService: VenueService,
     private _fileDownloadService: FileDownloadService,
     private _activatedRoute: ActivatedRoute,
     private router: Router
@@ -57,7 +57,7 @@ export class VoucherComponent extends AppComponentBase {
 
     this.primengTableHelper.showLoadingIndicator();
 
-    this._voucherService
+    this.venueService
       .getAllPaged(
         undefined,
         this.primengTableHelper.getSorting(this.dataTable),
@@ -76,21 +76,21 @@ export class VoucherComponent extends AppComponentBase {
     this.paginator.changePage(this.paginator.getPage())
   }
   
-  createVoucher(): void {
-    this.createOrEditVoucher.showVoucherModal();
+  createVenue(): void {
+    this.createOrEditVenue.showVenueModal();
   }
 
   view(id: number) {
-    this.router.navigate(['main/voucher/', id]);
+    this.router.navigate(['main/venue/', id]);
   }
 
-  remove(voucher: IVoucherDto): void {
+  remove(venue: IVenueDto): void {
     this.message.confirm(
-      this.l('voucherDeleteWarningMessage', voucher.id),
+      this.l('venueDeleteWarningMessage', venue.id),
       this.l('AreYouSure'),
       (isConfirmed) => {
         if (isConfirmed) {
-          this._voucherService.remove(voucher.id).subscribe(() => {
+          this.venueService.remove(venue.id).subscribe(() => {
             this.reloadPage();
             this.notify.success(this.l('SuccessfullyDeleted'));
           });
@@ -100,7 +100,7 @@ export class VoucherComponent extends AppComponentBase {
   }
 
   exportToExcel(): void {
-    // this._voucherService
+    // this.venueService
     // .getToExcel(
     //     this.filterText,
     //     this.primengTableHelper.getSorting(this.dataTable)

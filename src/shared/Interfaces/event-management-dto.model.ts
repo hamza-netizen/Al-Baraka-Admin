@@ -13,6 +13,7 @@ export interface IEventManagementDto {
     isPublished: boolean;
     displayOrder: number;
     tenantId: number;
+    folderPath: string;
     startDate: Date;
     endDate: Date;
     translations: TranslationEditDto[];
@@ -38,6 +39,7 @@ static fromJS(data: any): EventManagementDto {
     isPublished: boolean;
     displayOrder: number;
     tenantId: number;
+    folderPath: string;
     startDate: Date;
     endDate: Date;
     translations: TranslationEditDto[];
@@ -72,8 +74,9 @@ static fromJS(data: any): EventManagementDto {
         this.startDate = _data['startDate'];
         this.endDate = _data['endDate'];
         this.id = _data['id'];
+        this.folderPath = _data['folderPath'];
         this.tenantId = _data['tenantId'];
-
+        
 
         if (Array.isArray(_data['translations'])) {
             this.translations = [] as any;
@@ -111,6 +114,7 @@ static fromJS(data: any): EventManagementDto {
         data['startDate'] = this.startDate;
         data['endDate'] = this.endDate;
         data['id'] = this.id;
+        data['folderPath'] = this.folderPath;
         data['tenantId'] = this.tenantId;
 
         if (Array.isArray(this.translations)) {
@@ -202,3 +206,4 @@ clone(): EventManagementPagedResultDto {
     return result;
 }
 }
+

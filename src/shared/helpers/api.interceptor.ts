@@ -21,10 +21,10 @@ export class ApiInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const apiReq = request.clone({ url: this.baseUrl + request.url });
+    return next.handle(apiReq);
+
     // console.log('BASE URL',this.baseUrl);
     // console.log('Request URL',request.url);
-
-    console.log("Interceptor===>", apiReq);
-    return next.handle(apiReq);
+    // console.log("Interceptor===>", apiReq);
   }
 }

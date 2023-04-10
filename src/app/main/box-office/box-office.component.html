@@ -113,30 +113,29 @@
                                 [resizableColumns]="primengTableHelper.resizableColumns">
                                 <ng-template pTemplate="header">
                                     <tr>
-
                                         <th pSortableColumn="id">
                                             {{ 'id' | localize }}
                                             <p-sortIcon field="id"></p-sortIcon>
                                         </th>
-                                        <th pSortableColumn="name">
-                                            {{ 'Name' | localize }}
-                                            <p-sortIcon field="name"></p-sortIcon>
+                                        <th pSortableColumn="seatNo">
+                                            {{ 'seatNo' | localize }}
+                                            <p-sortIcon field="seatNo"></p-sortIcon>
                                         </th>
 
-                                        <th pSortableColumn="abbreviation">
-                                            {{ 'Abbreviation' | localize }}
-                                            <p-sortIcon field="abbreviation"></p-sortIcon>
+                                        <th pSortableColumn="price">
+                                            {{ 'price' | localize }}
+                                            <p-sortIcon field="price"></p-sortIcon>
                                         </th>
 
-                                        <th pSortableColumn="isPublished">
-                                            {{ 'Active' | localize }}
-                                            <p-sortIcon field="isPublished"></p-sortIcon>
+                                        <th pSortableColumn="isScanned">
+                                            {{ 'isScanned' | localize }}
+                                            <p-sortIcon field="isScanned"></p-sortIcon>
                                         </th>
                                   
-                                        <th pSortableColumn="displayOrder">
+                                        <!-- <th pSortableColumn="displayOrder">
                                             {{ 'Display Order' | localize }}
                                             <p-sortIcon field="displayOrder"></p-sortIcon>
-                                        </th>
+                                        </th> -->
                                     
                                         <!-- [hidden]=" !(['Pages.Administration.BoxOffice.Edit','Pages.Administration.BoxOffice.Delete'] | permissionAny)" -->
                                         <th >
@@ -155,16 +154,26 @@
 
                                         <td>
                                             <span class="p-column-title">
-                                                {{ 'Name' | localize }}
+                                                {{ 'SeatNo' | localize }}
                                             </span>
-                                            {{ record.name }}
+                                            {{ record.seatNo }}
                                         </td>
                                         
                                         <td>
                                             <span class="p-column-title">
-                                                {{ 'Abbreviation' | localize }}
+                                                {{ 'Price' | localize }}
                                             </span>
-                                            {{ record.abbreviation }}
+                                            {{ record.price }}
+                                        </td>
+
+                                        <td>
+                                            <span class="p-column-title">{{ 'isScanned' | localize }}</span>
+                                            <span class="badge badge-success" *ngIf="record.isScanned">
+                                                {{ 'Yes' | localize }}
+                                            </span>
+                                            <span class="badge badge-dark" *ngIf="!record.isScanned">
+                                                {{ 'No' | localize }}
+                                            </span>
                                         </td>
 
                                         <!-- <td>
@@ -173,23 +182,6 @@
                                             </span>
                                             {{ record.displayOrder }}
                                         </td> -->
-
-                                        <td>
-                                            <span class="p-column-title">{{ 'Published' | localize }}</span>
-                                            <span class="badge badge-success" *ngIf="record.published">
-                                                {{ 'Yes' | localize }}
-                                            </span>
-                                            <span class="badge badge-dark" *ngIf="!record.published">
-                                                {{ 'No' | localize }}
-                                            </span>
-                                        </td>
-
-                                        <td>
-                                            <span class="p-column-title">
-                                                {{ 'Display Order' | localize }}
-                                            </span>
-                                            {{ record.displayOrder }}
-                                        </td>
 
                                         <!-- [hidden]=" !(['Pages.Administration.BoxOffice.Edit','Pages.Administration.BoxOffice.Delete'] | permissionAny)" -->
                                         <td >
@@ -207,8 +199,8 @@
                                                     <li 
                                                         role="menuitem">
                                                         <a href="javascript:;" class="dropdown-item"
+                                                        (click)="createOrEditBoxOffice.showBoxOfficeModal(record.id)"
                                                         > 
-                                                        <!-- (click)="createOrEditBoxOffice.showBoxOfficeModal(record.id)" -->
 
                                                             {{ 'Edit' | localize }}
                                                         </a>
@@ -246,7 +238,7 @@
             </div>
         </div>
 
-        <!-- <createOrEditBoxOffice #createOrEditBoxOffice (modalSave)="createBoxOffice()"></createOrEditBoxOffice> -->
+        <createOrEditBoxOffice #createOrEditBoxOffice (modalSave)="createBoxOffice()"></createOrEditBoxOffice>
 
     </div>
 </div>

@@ -1,0 +1,80 @@
+<div appBsModal #createOrEditVoucher="bs-modal"  class="modal fade" tabindex="-1" role="dialog" aria-labelledby="createOrEditVoucher" aria-hidden="true" [config]="{backdrop: 'static', keyboard: !saving}">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form *ngIf="active" #voucherForm="ngForm" novalidate (ngSubmit)="save(voucher?.id)" autocomplete="new-password">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        <span *ngIf="voucher.id">{{"Edit voucher Request" | localize}}</span>
+                        <span *ngIf="!voucher.id">{{"Create voucher Request" | localize}}</span>
+                    </h4>
+                    <button type="button" class="close" class="btn-close" (click)="close()" [attr.aria-label]="l('Close')" [disabled]="saving"></button>
+                </div>
+                <div class="modal-body">
+                  <div class="row">
+
+                    <div class="form-group col-md-6 mt-5 mb-5">
+                        <label class="form-label" for="code">{{"Code" | localize}} </label>
+                        <input id="code" class="form-control" type="text" name="code" [(ngModel)]="voucher.code" maxlength="64">
+                    </div>  
+
+                    <div class="form-group col-md-6 mt-5 mb-5">
+                      <label class="form-label col-lg-12 " for="dropdownInput">{{"Event" | localize}}</label>
+                      <p-dropdown (onChange)="getAllEventManagement()" name="events" [options]="eventManagement" placeholder="Select Event" optionLabel="name" optionValue="id" [(ngModel)]="voucher.eventId" [showClear]="true"></p-dropdown>
+                    </div>
+
+                    <div class="p-fluid p-grid p-formgrid col-md-6 mt-5 mb-3">
+                        <label class="form-label col-lg-12" for="title">{{ 'Start Date' | localize }}</label>
+                        <p-calendar id="startDate" name="startDate" [(ngModel)]="voucher.startDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="icon"></p-calendar>
+                      </div>
+      
+                    <div class="p-fluid p-grid p-formgrid col-md-6 mt-5 mb-3">
+                        <label class="form-label col-lg-12" for="title">{{ 'End Date' | localize }}</label>
+                        <p-calendar id="endDate" name="endDate" [(ngModel)]="voucher.endDate" [showIcon]="true" showTime="true" [hourFormat]="12" dateFormat="yy.mm.dd" inputId="id"></p-calendar>
+                    </div>
+                      
+                    <div class="form-group col-md-12 mt-5">
+                      <label for="voucherType">Voucher Type</label>
+                      <div class="p-field-radiobutton mt-5 mb-5 ">
+                          <p-radioButton  inputId="customerbased" name="voucherType" value="1" [(ngModel)]="voucher.voucherType"></p-radioButton>
+                          <label class="px-2"  for="customerbased">Customer Based</label>
+                          <p-radioButton class="ml-5" inputId="eventBased" name="voucherType" value="2" [(ngModel)]="voucher.voucherType"></p-radioButton>
+                          <label class="px-2" for="eventBased">Event Based</label>
+                      </div>
+                    </div>
+                    <!-- <div class="form-group col-md-12 mt-5">
+                      <label for="discountType">Discount Type</label>
+                      <div class="p-field-radiobutton mt-5 mb-5 ">
+                          <p-radioButton  inputId="fixed" name="discountType" [value]="false" [(ngModel)]="voucher.discountType"></p-radioButton>
+                          <label class="px-2"  for="fixed">Fixed</label>
+                          <p-radioButton class="ml-5" inputId="percentage" name="discountType" [value]="true" [(ngModel)]="voucher.discountType"></p-radioButton>
+                          <label class="px-2" for="percentage">Percentage</label>
+                          <div class="mt-5 mb-5">
+                              <label class="px-2" for="amount">Amount</label> 
+                              <input pInputText  id="amount" type="number" name="amount" [(ngModel)]="voucher.amount">   
+                          </div>
+                      </div>
+                  </div> -->
+                  </div>
+                         
+                  <div class="mt-9">
+                    <label for="published" class="form-check form-check-custom form-check-solid py-1">
+                        <input id="published" class="form-check-input" type="checkbox" name="published" [(ngModel)]="voucher.isPublished">
+                        <span class="form-check-label">
+                          {{ 'published' | localize }}
+                      </span> 
+                    </label>
+                  </div> 
+                </div>
+                            
+            <div class="modal-footer">     
+              <button [disabled]="saving" type="button" class="btn btn-secondary" (click)="close()">{{"Cancel" | localize}}</button>
+              <button type="submit" class="btn btn-primary" [disabled]="!voucherForm.form.valid" [buttonBusy]="saving" [busyText]="l('SavingWithThreeDot')">
+                <i class="fa fa-save"></i> <span>{{"Save" | localize}}</span>
+              </button>
+            </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>

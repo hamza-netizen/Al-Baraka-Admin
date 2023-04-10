@@ -10,7 +10,7 @@ import { appModuleAnimation } from '@shared/animations/routerTransition';
 import { FileDownloadService } from '@shared/utils/file-download.service';
 import { BoxOfficeService } from '@shared/services/box-office.service';
 import { IBoxOfficeDto } from '@shared/interfaces/box-office-dto.model';
-// import { CreateOrEditBoxOfficeComponent } from './create-or-edit-boxOffice/create-or-edit-boxOffice.component';
+import { CreateOrEditBoxOfficeComponent } from './create-or-edit-box-office/create-or-edit-box-office.component';
 
 
 @Component({
@@ -21,7 +21,7 @@ import { IBoxOfficeDto } from '@shared/interfaces/box-office-dto.model';
 })
 
 export class BoxOfficeComponent extends AppComponentBase {
-  // @ViewChild('createOrEditBoxOffice', { static: true }) createOrEditBoxOffice: CreateOrEditBoxOfficeComponent;
+  @ViewChild('createOrEditBoxOffice', { static: true }) createOrEditBoxOffice: CreateOrEditBoxOfficeComponent;
 
   boxOfficeList: IBoxOfficeDto[];
 
@@ -78,7 +78,7 @@ export class BoxOfficeComponent extends AppComponentBase {
   }
   
   createBoxOffice(): void {
-    // this.createOrEditBoxOffice.showBoxOfficeModal();
+    this.createOrEditBoxOffice.showBoxOfficeModal();
   }
 
   view(id: number) {

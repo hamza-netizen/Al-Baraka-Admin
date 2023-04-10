@@ -118,24 +118,29 @@
                                             {{ 'id' | localize }}
                                             <p-sortIcon field="id"></p-sortIcon>
                                         </th>
-                                        <th pSortableColumn="name">
-                                            {{ 'Name' | localize }}
-                                            <p-sortIcon field="name"></p-sortIcon>
+                                        <th pSortableColumn="code">
+                                            {{ 'code' | localize }}
+                                            <p-sortIcon field="code"></p-sortIcon>
                                         </th>
 
-                                        <th pSortableColumn="abbreviation">
-                                            {{ 'Abbreviation' | localize }}
-                                            <p-sortIcon field="abbreviation"></p-sortIcon>
+                                        <th pSortableColumn="voucherType">
+                                            {{ 'voucherType' | localize }}
+                                            <p-sortIcon field="voucherType"></p-sortIcon>
+                                        </th>
+
+                                        <th pSortableColumn="startDate">
+                                            {{ 'startDate' | localize }}
+                                            <p-sortIcon field="startDate"></p-sortIcon>
+                                        </th>
+
+                                        <th pSortableColumn="endDate">
+                                            {{ 'endDate' | localize }}
+                                            <p-sortIcon field="endDate"></p-sortIcon>
                                         </th>
 
                                         <th pSortableColumn="isPublished">
-                                            {{ 'Active' | localize }}
+                                            {{ 'isPublished' | localize }}
                                             <p-sortIcon field="isPublished"></p-sortIcon>
-                                        </th>
-                                  
-                                        <th pSortableColumn="displayOrder">
-                                            {{ 'Display Order' | localize }}
-                                            <p-sortIcon field="displayOrder"></p-sortIcon>
                                         </th>
                                     
                                         <!-- [hidden]=" !(['Pages.Administration.Voucher.Edit','Pages.Administration.Voucher.Delete'] | permissionAny)" -->
@@ -155,24 +160,31 @@
 
                                         <td>
                                             <span class="p-column-title">
-                                                {{ 'Name' | localize }}
+                                                {{ 'code' | localize }}
                                             </span>
-                                            {{ record.name }}
+                                            {{ record.code }}
                                         </td>
                                         
                                         <td>
                                             <span class="p-column-title">
-                                                {{ 'Abbreviation' | localize }}
+                                                {{ 'voucherType' | localize }}
                                             </span>
-                                            {{ record.abbreviation }}
+                                            {{ record.voucherType }}
                                         </td>
 
-                                        <!-- <td>
+                                        <td>
                                             <span class="p-column-title">
-                                                {{ 'Display Order' | localize }}
+                                                {{ 'startDate' | localize }}
                                             </span>
-                                            {{ record.displayOrder }}
-                                        </td> -->
+                                            {{ record.startDate }}
+                                        </td>
+
+                                        <td>
+                                            <span class="p-column-title">
+                                                {{ 'endDate' | localize }}
+                                            </span>
+                                            {{ record.endDate }}
+                                        </td>
 
                                         <td>
                                             <span class="p-column-title">{{ 'Published' | localize }}</span>
@@ -182,13 +194,6 @@
                                             <span class="badge badge-dark" *ngIf="!record.published">
                                                 {{ 'No' | localize }}
                                             </span>
-                                        </td>
-
-                                        <td>
-                                            <span class="p-column-title">
-                                                {{ 'Display Order' | localize }}
-                                            </span>
-                                            {{ record.displayOrder }}
                                         </td>
 
                                         <!-- [hidden]=" !(['Pages.Administration.Voucher.Edit','Pages.Administration.Voucher.Delete'] | permissionAny)" -->
@@ -207,9 +212,7 @@
                                                     <li 
                                                         role="menuitem">
                                                         <a href="javascript:;" class="dropdown-item"
-                                                        > 
-                                                        <!-- (click)="createOrEditVoucher.showVoucherModal(record.id)" -->
-
+                                                            (click)="createOrEditVoucher.showVoucherModal(record.id)" > 
                                                             {{ 'Edit' | localize }}
                                                         </a>
                                                     </li>
@@ -246,7 +249,7 @@
             </div>
         </div>
 
-        <!-- <createOrEditVoucher #createOrEditVoucher (modalSave)="createVoucher()"></createOrEditVoucher> -->
+        <createOrEditVoucher #createOrEditVoucher (modalSave)="createVoucher()"></createOrEditVoucher>
 
     </div>
 </div>
