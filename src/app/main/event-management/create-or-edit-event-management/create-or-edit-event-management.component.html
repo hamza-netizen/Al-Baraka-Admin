@@ -32,8 +32,6 @@
                           <textarea cdkTextareaAutosize pInputTextarea id="detail" class="form-control" type="text" name="detail" [(ngModel)]="eventManagement.detail"> </textarea>
                         </div>  
     
-                      
-    
                         <div class="form-group col-md-6 mt-5 mb-5">
                             <label for="minimumSeats" class="form-label" for="minimumSeats">{{"minimumSeats" | localize}}</label>
                             <input id="minimumSeats" class="form-control" type="number" name="minimumSeats" [(ngModel)]="eventManagement.minimumSeats">
@@ -58,26 +56,22 @@
                         </div>   -->
                     
                     </div>
-
                     <hr>
-
-                      <div class="form-group col-md-6 mt-5 mb-5">
-                                        
-                        <button *ngIf="!eventBanner" (click)="crop('eventBanner')" type="button" class="btn btn-primary" style="width: 40.5rem ; ">
-                            {{"Select Event Banner" | localize}}</button>
-                        <button *ngIf="eventBanner" (click)="crop('eventBanner')" type="button" class="btn btn-dark" style="width: 40.5rem ; ">
-                            {{"Change Event banner" | localize}}</button>
-    
-                        <div *ngIf="eventBanner"  class="col-md-8 row mt-5">
-                            <div class="form-group col-md-4">
-                                <img [src]="eventBanner" style="width: 250px;" alt="">
-                            </div>
-                            <div class="form-group col-md-12 mt-2">
-                                <button type="button" class="btn btn-danger" (click)="deleteImage('eventBanner')">{{"Delete banner" | localize}}</button>
+                        <div class="form-group col-md-6 mt-5 mb-5">
+                            <button *ngIf="!eventBanner" (click)="crop('eventBanner')" type="button" class="btn btn-primary" style="width: 40.5rem ; ">
+                                {{"Select Event Banner" | localize}}</button>
+                            <button *ngIf="eventBanner" (click)="crop('eventBanner')" type="button" class="btn btn-dark" style="width: 40.5rem ; ">
+                                {{"Change Event banner" | localize}}</button>
+        
+                            <div *ngIf="eventBanner"  class="col-md-8 row mt-5">
+                                <div class="form-group col-md-4">
+                                    <img [src]="eventBanner" style="width: 250px;" alt="">
+                                </div>
+                                <div class="form-group col-md-12 mt-2">
+                                    <button type="button" class="btn btn-danger" (click)="deleteImage('eventBanner')">{{"Delete banner" | localize}}</button>
+                                </div>
                             </div>
                         </div>
-    
-                      </div>
 
                       <div class="mt-9">
                           <label for="refundAllowed" class="form-check form-check-custom form-check-solid py-1">
@@ -116,16 +110,20 @@
                           <label class="form-label" for="noOfSeats">{{"Seats" | localize}} </label>
                           <input id="noOfSeats" class="form-control" type="number" [name]="'noOfSeats' + i" [(ngModel)]="cat.noOfSeats"  maxlength="10">
                         </div>  
+
+                        <div class="form-group col-md-6 mt-5 mb-5">
+                          <p-dropdown (onChange)="getDays()" name="weekday" [options]="weekdays" [(ngModel)]="selectedWeekDayIds" optionLabel="name" optionValue="id"></p-dropdown>
+                        </div>
                       </div>
 
-                      <select id="weekday-dropdown">
+                      <!-- <select id="weekday-dropdown">
                         <option  value="">Select a day</option>
                         <ng-container  *ngFor="let weekday of weekdays">
                           <option value="{{ weekday.id }}">{{ weekday.name }}</option>
                         </ng-container>
-                      </select>
+                      </select> -->
 
-                      <p-dropdown (onChange)="getDays()" [options]="weekdays" [(ngModel)]="selectedWeekDayIds" optionLabel="weekday" optionValue="weekday"></p-dropdown>
+                      
 
 
                     </tab>

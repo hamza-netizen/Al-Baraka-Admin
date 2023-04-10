@@ -98,7 +98,7 @@ export class CreateOrEditEventManagementComponent extends AppComponentBase {
       }
 
       if(this.eventManagement.eventManagementWeekDays){
-        this.weekdays = this._eventManagementService.getWeekdays().map(x => x.name)
+        this.weekdays = this._eventManagementService.getWeekdays()
       }
 
       if (this.eventManagement.banner) {
@@ -107,6 +107,7 @@ export class CreateOrEditEventManagementComponent extends AppComponentBase {
       }
 
       this.getAllCategories();
+      this.getDays();
       this.prepareTranslationModels(true);
       this.active = true;
       this.modal.show();
@@ -181,8 +182,7 @@ export class CreateOrEditEventManagementComponent extends AppComponentBase {
   }
 
   getDays(){
-    this.weekdays = this._eventManagementService.getWeekdays();
-   
+    this.weekdays = this._eventManagementService.getWeekdays().filter(x=>x.name);
   }
 
   crop(field? :string): void{
